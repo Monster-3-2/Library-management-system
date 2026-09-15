@@ -1,0 +1,105 @@
+<svg viewBox="0 0 860 480" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif" font-size="11">
+  <rect width="860" height="480" fill="#f8f9fc" rx="12"/>
+  <text x="430" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">ER Diagram — Library Book Management System</text>
+
+  <!-- BOOK entity -->
+  <rect x="30" y="60" width="190" height="300" rx="8" fill="white" stroke="#3b5bdb" stroke-width="2"/>
+  <rect x="30" y="60" width="190" height="36" rx="8" fill="#3b5bdb"/>
+  <rect x="30" y="84" width="190" height="12" fill="#3b5bdb"/>
+  <text x="125" y="84" text-anchor="middle" fill="white" font-weight="bold" font-size="13">BOOK</text>
+  <!-- PK -->
+  <text x="50" y="115" fill="#3b5bdb" font-weight="bold">PK</text>
+  <text x="75" y="115" fill="#1a1a2e" text-decoration="underline">bookId (BK-NNNN)</text>
+  <line x1="50" y1="120" x2="210" y2="120" stroke="#eee"/>
+  <text x="75" y="138" fill="#333">title</text>
+  <line x1="50" y1="143" x2="210" y2="143" stroke="#eee"/>
+  <text x="75" y="161" fill="#333">author</text>
+  <line x1="50" y1="166" x2="210" y2="166" stroke="#eee"/>
+  <text x="75" y="184" fill="#333">genre</text>
+  <line x1="50" y1="189" x2="210" y2="189" stroke="#eee"/>
+  <text x="75" y="207" fill="#333">yearPublished</text>
+  <line x1="50" y1="212" x2="210" y2="212" stroke="#eee"/>
+  <text x="75" y="230" fill="#333">isAvailable (boolean)</text>
+  <line x1="50" y1="235" x2="210" y2="235" stroke="#eee"/>
+  <text x="50" y="253" fill="#888">FK</text>
+  <text x="75" y="253" fill="#888">reservedByMemberId</text>
+  <line x1="50" y1="258" x2="210" y2="258" stroke="#eee"/>
+  <!-- constraints -->
+  <text x="46" y="290" fill="#555" font-size="10">• isAvailable default: true</text>
+  <text x="46" y="305" fill="#555" font-size="10">• Cannot delete if issued</text>
+  <text x="46" y="320" fill="#555" font-size="10">• reservedByMemberId nullable</text>
+  <text x="46" y="340" fill="#555" font-size="10">• title NOT NULL</text>
+  <text x="46" y="355" fill="#555" font-size="10">• author NOT NULL</text>
+
+  <!-- MEMBER entity -->
+  <rect x="330" y="60" width="190" height="275" rx="8" fill="white" stroke="#3b5bdb" stroke-width="2"/>
+  <rect x="330" y="60" width="190" height="36" rx="8" fill="#3b5bdb"/>
+  <rect x="330" y="84" width="190" height="12" fill="#3b5bdb"/>
+  <text x="425" y="84" text-anchor="middle" fill="white" font-weight="bold" font-size="13">MEMBER</text>
+  <text x="350" y="115" fill="#3b5bdb" font-weight="bold">PK</text>
+  <text x="375" y="115" fill="#1a1a2e" text-decoration="underline">memberId (MB-NNNN)</text>
+  <line x1="350" y1="120" x2="510" y2="120" stroke="#eee"/>
+  <text x="375" y="138" fill="#333">name</text>
+  <line x1="350" y1="143" x2="510" y2="143" stroke="#eee"/>
+  <text x="375" y="161" fill="#333">email (UNIQUE)</text>
+  <line x1="350" y1="166" x2="510" y2="166" stroke="#eee"/>
+  <text x="375" y="184" fill="#333">phone (10 digits)</text>
+  <line x1="350" y1="189" x2="510" y2="189" stroke="#eee"/>
+  <text x="375" y="207" fill="#333">borrowedBookIds (List)</text>
+  <line x1="350" y1="212" x2="510" y2="212" stroke="#eee"/>
+  <text x="346" y="240" fill="#555" font-size="10">• email validated (regex)</text>
+  <text x="346" y="255" fill="#555" font-size="10">• phone: exactly 10 digits</text>
+  <text x="346" y="270" fill="#555" font-size="10">• Cannot delete if borrowedBookIds</text>
+  <text x="346" y="283" fill="#555" font-size="10">  is not empty</text>
+  <text x="346" y="298" fill="#555" font-size="10">• Max 3 concurrent borrows</text>
+  <text x="346" y="313" fill="#555" font-size="10">• email UNIQUE constraint</text>
+
+  <!-- TRANSACTION entity -->
+  <rect x="630" y="60" width="200" height="300" rx="8" fill="white" stroke="#3b5bdb" stroke-width="2"/>
+  <rect x="630" y="60" width="200" height="36" rx="8" fill="#3b5bdb"/>
+  <rect x="630" y="84" width="200" height="12" fill="#3b5bdb"/>
+  <text x="730" y="84" text-anchor="middle" fill="white" font-weight="bold" font-size="13">TRANSACTION</text>
+  <text x="650" y="115" fill="#3b5bdb" font-weight="bold">PK</text>
+  <text x="675" y="115" fill="#1a1a2e">transactionId (TXN-N)</text>
+  <line x1="650" y1="120" x2="820" y2="120" stroke="#eee"/>
+  <text x="650" y="138" fill="#888">FK</text>
+  <text x="675" y="138" fill="#888">memberId → MEMBER</text>
+  <line x1="650" y1="143" x2="820" y2="143" stroke="#eee"/>
+  <text x="650" y="161" fill="#888">FK</text>
+  <text x="675" y="161" fill="#888">bookId → BOOK</text>
+  <line x1="650" y1="166" x2="820" y2="166" stroke="#eee"/>
+  <text x="675" y="184" fill="#333">type (BORROW/RETURN)</text>
+  <line x1="650" y1="189" x2="820" y2="189" stroke="#eee"/>
+  <text x="675" y="207" fill="#333">date (LocalDate)</text>
+  <line x1="650" y1="212" x2="820" y2="212" stroke="#eee"/>
+  <text x="675" y="230" fill="#333">dueDate (nullable)</text>
+  <line x1="650" y1="235" x2="820" y2="235" stroke="#eee"/>
+  <text x="650" y="257" fill="#555" font-size="10">• dueDate = date + 14 days</text>
+  <text x="650" y="272" fill="#555" font-size="10">• Fine: Rs. 2/day overdue</text>
+  <text x="650" y="287" fill="#555" font-size="10">• dueDate NULL for RETURN</text>
+  <text x="650" y="302" fill="#555" font-size="10">• Append-only (no deletes)</text>
+  <text x="650" y="317" fill="#555" font-size="10">• memberId NOT NULL</text>
+  <text x="650" y="332" fill="#555" font-size="10">• bookId NOT NULL</text>
+
+  <!-- Relationship: MEMBER borrows BOOK via TRANSACTION -->
+  <!-- diamond for relationship -->
+  <polygon points="430,400 480,430 430,460 380,430" fill="white" stroke="#2e7d32" stroke-width="2"/>
+  <text x="430" y="434" text-anchor="middle" fill="#2e7d32" font-weight="bold" font-size="12">BORROWS</text>
+
+  <!-- lines from entities to relationship -->
+  <line x1="425" y1="335" x2="425" y2="400" stroke="#2e7d32" stroke-width="1.8"/>
+  <line x1="730" y1="360" x2="730" y2="430" stroke="#2e7d32" stroke-width="1.8"/>
+  <line x1="730" y1="430" x2="480" y2="430" stroke="#2e7d32" stroke-width="1.8"/>
+  <line x1="125" y1="360" x2="125" y2="430" stroke="#2e7d32" stroke-width="1.8"/>
+  <line x1="125" y1="430" x2="380" y2="430" stroke="#2e7d32" stroke-width="1.8"/>
+
+  <!-- cardinality labels -->
+  <text x="415" y="398" font-size="12" fill="#2e7d32" font-weight="bold">1</text>
+  <text x="415" y="458" font-size="12" fill="#2e7d32" font-weight="bold">N</text>
+  <text x="488" y="425" font-size="12" fill="#2e7d32" font-weight="bold">N</text>
+  <text x="365" y="425" font-size="12" fill="#2e7d32" font-weight="bold">M</text>
+  <text x="735" y="425" font-size="12" fill="#2e7d32" font-weight="bold">N</text>
+  <text x="118" y="425" font-size="12" fill="#2e7d32" font-weight="bold">M</text>
+
+  <text x="430" y="468" text-anchor="middle" font-size="10" fill="#555">One Member borrows Many Books; resolved through TRANSACTION (M:N)</text>
+</svg>

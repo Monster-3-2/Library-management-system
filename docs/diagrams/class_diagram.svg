@@ -1,0 +1,228 @@
+<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif" font-size="11">
+  <rect width="1000" height="700" fill="#f8f9fc" rx="12"/>
+  <text x="500" y="32" text-anchor="middle" font-size="17" font-weight="bold" fill="#1a1a2e">Class Diagram — Library Book Management System</text>
+
+  <!-- ── MODEL CLASSES ──────────────────────────────── -->
+
+  <!-- Book -->
+  <g transform="translate(30,60)">
+    <rect width="190" height="200" rx="6" fill="white" stroke="#3b5bdb" stroke-width="2"/>
+    <rect width="190" height="30" rx="6" fill="#3b5bdb"/>
+    <rect x="0" y="24" width="190" height="6" fill="#3b5bdb"/>
+    <text x="95" y="20" text-anchor="middle" fill="white" font-weight="bold" font-size="12">Book</text>
+    <!-- fields -->
+    <text x="8" y="52" fill="#333">- bookId: String</text>
+    <text x="8" y="68" fill="#333">- title: String</text>
+    <text x="8" y="84" fill="#333">- author: String</text>
+    <text x="8" y="100" fill="#333">- genre: String</text>
+    <text x="8" y="116" fill="#333">- yearPublished: int</text>
+    <text x="8" y="132" fill="#333">- isAvailable: boolean</text>
+    <text x="8" y="148" fill="#333">- reservedByMemberId: String</text>
+    <line x1="0" y1="158" x2="190" y2="158" stroke="#ccc"/>
+    <!-- methods -->
+    <text x="8" y="172" fill="#555">+ isAvailable(): boolean</text>
+    <text x="8" y="186" fill="#555">+ toFileString(): String</text>
+    <text x="8" y="200" fill="#555">+ fromFileString(s): Book</text>
+  </g>
+
+  <!-- Member -->
+  <g transform="translate(240,60)">
+    <rect width="190" height="185" rx="6" fill="white" stroke="#3b5bdb" stroke-width="2"/>
+    <rect width="190" height="30" rx="6" fill="#3b5bdb"/>
+    <rect x="0" y="24" width="190" height="6" fill="#3b5bdb"/>
+    <text x="95" y="20" text-anchor="middle" fill="white" font-weight="bold" font-size="12">Member</text>
+    <text x="8" y="52" fill="#333">- memberId: String</text>
+    <text x="8" y="68" fill="#333">- name: String</text>
+    <text x="8" y="84" fill="#333">- email: String</text>
+    <text x="8" y="100" fill="#333">- phone: String</text>
+    <text x="8" y="116" fill="#333">- borrowedBookIds: List&lt;String&gt;</text>
+    <line x1="0" y1="126" x2="190" y2="126" stroke="#ccc"/>
+    <text x="8" y="140" fill="#555">+ borrowBook(id): void</text>
+    <text x="8" y="154" fill="#555">+ returnBook(id): void</text>
+    <text x="8" y="168" fill="#555">+ hasBorrowed(id): boolean</text>
+    <text x="8" y="182" fill="#555">+ toFileString(): String</text>
+  </g>
+
+  <!-- Transaction -->
+  <g transform="translate(450,60)">
+    <rect width="205" height="210" rx="6" fill="white" stroke="#3b5bdb" stroke-width="2"/>
+    <rect width="205" height="30" rx="6" fill="#3b5bdb"/>
+    <rect x="0" y="24" width="205" height="6" fill="#3b5bdb"/>
+    <text x="102" y="20" text-anchor="middle" fill="white" font-weight="bold" font-size="12">Transaction</text>
+    <text x="8" y="52" fill="#333">- transactionId: String</text>
+    <text x="8" y="68" fill="#333">- memberId: String</text>
+    <text x="8" y="84" fill="#333">- bookId: String</text>
+    <text x="8" y="100" fill="#333">- type: Type {BORROW, RETURN}</text>
+    <text x="8" y="116" fill="#333">- date: LocalDate</text>
+    <text x="8" y="132" fill="#333">- dueDate: LocalDate</text>
+    <text x="8" y="148" fill="#333">FINE_PER_DAY: 2.0</text>
+    <line x1="0" y1="158" x2="205" y2="158" stroke="#ccc"/>
+    <text x="8" y="172" fill="#555">+ isOverdue(): boolean</text>
+    <text x="8" y="186" fill="#555">+ calculateFine(): double</text>
+    <text x="8" y="200" fill="#555">+ toFileString(): String</text>
+  </g>
+
+  <!-- Admin -->
+  <g transform="translate(675,60)">
+    <rect width="170" height="155" rx="6" fill="white" stroke="#3b5bdb" stroke-width="2"/>
+    <rect width="170" height="30" rx="6" fill="#3b5bdb"/>
+    <rect x="0" y="24" width="170" height="6" fill="#3b5bdb"/>
+    <text x="85" y="20" text-anchor="middle" fill="white" font-weight="bold" font-size="12">Admin</text>
+    <text x="8" y="52" fill="#333">- adminId: String</text>
+    <text x="8" y="68" fill="#333">- username: String</text>
+    <text x="8" y="84" fill="#333">- passwordHash: int</text>
+    <line x1="0" y1="94" x2="170" y2="94" stroke="#ccc"/>
+    <text x="8" y="108" fill="#555">+ authenticate(pw): boolean</text>
+    <text x="8" y="124" fill="#555">+ getUsername(): String</text>
+    <text x="8" y="140" fill="#555">+ getAdminId(): String</text>
+  </g>
+
+  <!-- ── SERVICE CLASSES ───────────────────────────── -->
+
+  <!-- BookService -->
+  <g transform="translate(30,320)">
+    <rect width="195" height="210" rx="6" fill="white" stroke="#2e7d32" stroke-width="2"/>
+    <rect width="195" height="30" rx="6" fill="#2e7d32"/>
+    <rect x="0" y="24" width="195" height="6" fill="#2e7d32"/>
+    <text x="97" y="20" text-anchor="middle" fill="white" font-weight="bold" font-size="12">BookService</text>
+    <text x="8" y="52" fill="#333">- catalogue: Map&lt;String,Book&gt;</text>
+    <line x1="0" y1="60" x2="195" y2="60" stroke="#ccc"/>
+    <text x="8" y="75" fill="#555">+ addBook(...): Book</text>
+    <text x="8" y="90" fill="#555">+ removeBook(id): boolean</text>
+    <text x="8" y="105" fill="#555">+ updateBook(...): boolean</text>
+    <text x="8" y="120" fill="#555">+ searchByTitle(kw): List</text>
+    <text x="8" y="135" fill="#555">+ searchByAuthor(kw): List</text>
+    <text x="8" y="150" fill="#555">+ searchByGenre(kw): List</text>
+    <text x="8" y="165" fill="#555">+ getAvailableBooks(): List</text>
+    <text x="8" y="180" fill="#555">+ reserveBook(id,mbr): boolean</text>
+    <text x="8" y="195" fill="#555">+ markAsIssued(id): void</text>
+    <text x="8" y="210" fill="#555">- persist(): void</text>
+  </g>
+
+  <!-- MemberService -->
+  <g transform="translate(245,320)">
+    <rect width="195" height="180" rx="6" fill="white" stroke="#2e7d32" stroke-width="2"/>
+    <rect width="195" height="30" rx="6" fill="#2e7d32"/>
+    <rect x="0" y="24" width="195" height="6" fill="#2e7d32"/>
+    <text x="97" y="20" text-anchor="middle" fill="white" font-weight="bold" font-size="12">MemberService</text>
+    <text x="8" y="52" fill="#333">- registry: Map&lt;String,Member&gt;</text>
+    <line x1="0" y1="60" x2="195" y2="60" stroke="#ccc"/>
+    <text x="8" y="75" fill="#555">+ registerMember(...): Member</text>
+    <text x="8" y="90" fill="#555">+ updateMember(...): boolean</text>
+    <text x="8" y="105" fill="#555">+ removeMember(id): boolean</text>
+    <text x="8" y="120" fill="#555">+ getMemberById(id): Member</text>
+    <text x="8" y="135" fill="#555">+ searchByName(kw): List</text>
+    <text x="8" y="150" fill="#555">+ getAllMembers(): List</text>
+    <text x="8" y="165" fill="#555">- persist(): void</text>
+  </g>
+
+  <!-- BorrowService -->
+  <g transform="translate(460,320)">
+    <rect width="205" height="210" rx="6" fill="white" stroke="#2e7d32" stroke-width="2"/>
+    <rect width="205" height="30" rx="6" fill="#2e7d32"/>
+    <rect x="0" y="24" width="205" height="6" fill="#2e7d32"/>
+    <text x="102" y="20" text-anchor="middle" fill="white" font-weight="bold" font-size="12">BorrowService</text>
+    <text x="8" y="52" fill="#333">- bookService: BookService</text>
+    <text x="8" y="66" fill="#333">- memberService: MemberService</text>
+    <text x="8" y="80" fill="#333">- transactionLog: List&lt;Transaction&gt;</text>
+    <text x="8" y="94" fill="#333">MAX_BORROW_LIMIT = 3</text>
+    <line x1="0" y1="102" x2="205" y2="102" stroke="#ccc"/>
+    <text x="8" y="117" fill="#555">+ issueBook(mbr,bk): boolean</text>
+    <text x="8" y="132" fill="#555">+ returnBook(mbr,bk): boolean</text>
+    <text x="8" y="147" fill="#555">+ showFineForMember(id): void</text>
+    <text x="8" y="162" fill="#555">+ printFullHistory(): void</text>
+    <text x="8" y="177" fill="#555">+ printOverdueReport(): void</text>
+    <text x="8" y="192" fill="#555">+ printLibrarySummary(): void</text>
+    <text x="8" y="207" fill="#555">- persist(): void</text>
+  </g>
+
+  <!-- AdminService -->
+  <g transform="translate(685,320)">
+    <rect width="175" height="165" rx="6" fill="white" stroke="#2e7d32" stroke-width="2"/>
+    <rect width="175" height="30" rx="6" fill="#2e7d32"/>
+    <rect x="0" y="24" width="175" height="6" fill="#2e7d32"/>
+    <text x="87" y="20" text-anchor="middle" fill="white" font-weight="bold" font-size="12">AdminService</text>
+    <text x="8" y="52" fill="#333">- admins: Map&lt;String,Admin&gt;</text>
+    <text x="8" y="66" fill="#333">- loggedInAdmin: Admin</text>
+    <line x1="0" y1="74" x2="175" y2="74" stroke="#ccc"/>
+    <text x="8" y="90" fill="#555">+ login(user,pw): boolean</text>
+    <text x="8" y="105" fill="#555">+ logout(): void</text>
+    <text x="8" y="120" fill="#555">+ isLoggedIn(): boolean</text>
+    <text x="8" y="135" fill="#555">+ getLoggedInAdmin(): Admin</text>
+  </g>
+
+  <!-- ── UTIL / STORAGE CLASSES ──────────────────────── -->
+
+  <!-- FileStorage -->
+  <g transform="translate(30,570)">
+    <rect width="200" height="110" rx="6" fill="white" stroke="#e65100" stroke-width="2"/>
+    <rect width="200" height="30" rx="6" fill="#e65100"/>
+    <rect x="0" y="24" width="200" height="6" fill="#e65100"/>
+    <text x="100" y="20" text-anchor="middle" fill="white" font-weight="bold" font-size="12">«utility» FileStorage</text>
+    <line x1="0" y1="30" x2="200" y2="30" stroke="#ccc"/>
+    <text x="8" y="52" fill="#555">+ saveBooks(col): void</text>
+    <text x="8" y="67" fill="#555">+ loadBooks(): List&lt;Book&gt;</text>
+    <text x="8" y="82" fill="#555">+ saveMembers(col): void</text>
+    <text x="8" y="97" fill="#555">+ saveTransactions(list): void</text>
+  </g>
+
+  <!-- Validator -->
+  <g transform="translate(250,570)">
+    <rect width="175" height="110" rx="6" fill="white" stroke="#6a1b9a" stroke-width="2"/>
+    <rect width="175" height="30" rx="6" fill="#6a1b9a"/>
+    <rect x="0" y="24" width="175" height="6" fill="#6a1b9a"/>
+    <text x="87" y="20" text-anchor="middle" fill="white" font-weight="bold" font-size="12">«utility» Validator</text>
+    <text x="8" y="52" fill="#555">+ isValidEmail(s): boolean</text>
+    <text x="8" y="67" fill="#555">+ isValidPhone(s): boolean</text>
+    <text x="8" y="82" fill="#555">+ isValidYear(y): boolean</text>
+    <text x="8" y="97" fill="#555">+ isNonEmpty(s): boolean</text>
+  </g>
+
+  <!-- IdGenerator -->
+  <g transform="translate(445,570)">
+    <rect width="175" height="95" rx="6" fill="white" stroke="#6a1b9a" stroke-width="2"/>
+    <rect width="175" height="30" rx="6" fill="#6a1b9a"/>
+    <rect x="0" y="24" width="175" height="6" fill="#6a1b9a"/>
+    <text x="87" y="20" text-anchor="middle" fill="white" font-weight="bold" font-size="12">«utility» IdGenerator</text>
+    <text x="8" y="52" fill="#555">+ generateBookId(): String</text>
+    <text x="8" y="67" fill="#555">+ generateMemberId(): String</text>
+    <text x="8" y="82" fill="#555">+ generateTransactionId(): String</text>
+  </g>
+
+  <!-- Logger -->
+  <g transform="translate(640,570)">
+    <rect width="155" height="95" rx="6" fill="white" stroke="#6a1b9a" stroke-width="2"/>
+    <rect width="155" height="30" rx="6" fill="#6a1b9a"/>
+    <rect x="0" y="24" width="155" height="6" fill="#6a1b9a"/>
+    <text x="77" y="20" text-anchor="middle" fill="white" font-weight="bold" font-size="12">«utility» Logger</text>
+    <text x="8" y="52" fill="#555">+ info(msg): void</text>
+    <text x="8" y="67" fill="#555">+ warn(msg): void</text>
+    <text x="8" y="82" fill="#555">+ error(msg): void</text>
+  </g>
+
+  <!-- ── RELATIONSHIPS ──────────────────────────────── -->
+  <!-- BorrowService uses BookService -->
+  <line x1="460" y1="410" x2="225" y2="410" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow)"/>
+  <!-- BorrowService uses MemberService -->
+  <line x1="460" y1="430" x2="440" y2="430" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow)"/>
+  <!-- BookService uses Book -->
+  <line x1="127" y1="320" x2="127" y2="260" stroke="#3b5bdb" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- MemberService uses Member -->
+  <line x1="342" y1="320" x2="335" y2="245" stroke="#3b5bdb" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- BorrowService creates Transaction -->
+  <line x1="562" y1="320" x2="552" y2="270" stroke="#3b5bdb" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- AdminService uses Admin -->
+  <line x1="772" y1="320" x2="760" y2="215" stroke="#3b5bdb" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Services use FileStorage -->
+  <line x1="127" y1="530" x2="130" y2="570" stroke="#e65100" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <line x1="342" y1="500" x2="200" y2="580" stroke="#e65100" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <line x1="562" y1="530" x2="230" y2="600" stroke="#e65100" stroke-width="1.2" stroke-dasharray="4,3"/>
+
+  <!-- arrow marker -->
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#555"/>
+    </marker>
+  </defs>
+</svg>
